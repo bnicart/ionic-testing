@@ -1,4 +1,4 @@
-describe('Controllers', function() {
+describe('AccountCtrl', function() {
   var scope;
 
   beforeEach(module('starter.controllers'));
