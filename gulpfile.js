@@ -6,7 +6,6 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
-var karma = require('karma').server;
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -51,12 +50,16 @@ gulp.task('git-check', function(done) {
   done();
 });
 
+var karmaServer = require('karma').Server;
+
 gulp.task('test', function(done) {
-  karma.start({
+  var config = {
     configFile: __dirname + '/tests/my.conf.js',
-    singleRun: true
-  }, function() {
-    done();
-  });
+    singleRun: true,
+    autoWatch: false
+  };
+
+  var server = new karmaServer(config, done);
+  server.start();
 });
 
